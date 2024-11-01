@@ -10,11 +10,12 @@
         .transition-all {
             transition: all 0.3s ease;
         }
-        .hover\:scale-105:hover {
-            transform: scale(1.05);
-        }
         .nav-link:hover {
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+        /* Prevent overflow */
+        body {
+            overflow-x: hidden; /* Verhindert horizontale scrollbars */
         }
     </style>
 </head>
@@ -28,11 +29,25 @@
                 <h1 class="text-2xl font-bold ml-2">Voetbal Frontier</h1>
             </div>
             <nav>
-                <ul class="flex space-x-6">
+                <ul class="flex space-x-4"> <!-- Ruimte tussen de links verkleinen -->
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Stand</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Speel schema</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
+
+                    @if(Auth::check())
+                        <li class="flex items-center">
+                            <span class="mr-2">{{ Auth::user()->name }}</span>
+                            <a href="{{ route('logout') }}" class="text-yellow-400 hover:text-yellow-300 transition-all"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @else
+                        <li><a href="{{ route('login') }}" class="nav-link hover:text-yellow-300 transition-all">Inloggen</a></li>
+                        <li><a href="{{ route('register') }}" class="nav-link hover:text-yellow-300 transition-all">Registreren</a></li>
+                    @endif
                 </ul>
             </nav>
         </div>
@@ -50,8 +65,7 @@
             </p>
         </section>
 
-    <!-- Main Content -->
-    <main class="container mx-auto py-8 px-4">
+        <!-- Dit gedeelte wordt vervangen door de content van de child views -->
         @yield('content')
     </main>
 
