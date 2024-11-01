@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Zorg dat de footer altijd onderaan blijft, zelfs als de content kort is */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minstens de volledige hoogte van het scherm */
+}
+
+main {
+    flex: 1; /* Dit zorgt ervoor dat de content de resterende ruimte opvult */
+}
+
+/* Footer los van de content */
+footer {
+    margin-top: 20px; /* Voeg een kleine ruimte toe boven de footer */
+}
+
