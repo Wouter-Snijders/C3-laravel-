@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voetbal Toernooi</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Aangepaste stijlen voor animaties */
         .transition-all {
@@ -29,7 +30,7 @@
                 <h1 class="text-2xl font-bold ml-2">Voetbal Frontier</h1>
             </div>
             <nav>
-                <ul class="flex space-x-4"> <!-- Ruimte tussen de links verkleinen -->
+                <ul class="flex space-x-4">
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Stand</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Speel schema</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
@@ -64,13 +65,13 @@
             <p>&copy; {{ date('Y') }} Voetbal Toernooi. Alle rechten voorbehouden.</p>
             <div class="flex justify-center space-x-4 mt-2">
                 <a href="https://x.com/curioonderwijs" class="hover:text-yellow-300 transition-all">
-                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fab fa-twitter"></i>
                 </a>
                 <a href="https://www.instagram.com/curioonderwijsgroep/" class="hover:text-yellow-300 transition-all">
-                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/curioonderwijs/?locale=nl_NL" class="hover:text-yellow-300 transition-all">
-                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fab fa-facebook"></i>
                 </a>
             </div>
         </div>
