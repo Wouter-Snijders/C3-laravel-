@@ -33,9 +33,9 @@
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Stand</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Speel schema</a></li>
                     <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
-                    <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
 
                     @if(Auth::check())
+                        <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
                         <li class="flex items-center">
                             <span class="mr-2">{{ Auth::user()->name }}</span>
                             <a href="{{ route('logout') }}" class="text-yellow-400 hover:text-yellow-300 transition-all"
@@ -53,19 +53,8 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Dit gedeelte wordt vervangen door de content van de child views -->
     <main class="container mx-auto py-8 px-4">
-        <!-- Inleiding van het toernooi -->
-        <section class="bg-yellow-100 text-gray-900 p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-xl font-semibold mb-2">Wat is het FFI?</h2>
-            <p>
-                Welkom bij het Voetbal Frontier Toernooi! Dit toernooi brengt teams van verschillende niveaus samen voor een spannende competitie.
-                Bereid je voor op actie, teamwork en veel plezier terwijl we strijden om de overwinning.
-                Kijk snel naar het speelschema en ontdek wanneer jouw team in actie komt!
-            </p>
-        </section>
-
-        <!-- Dit gedeelte wordt vervangen door de content van de child views -->
         @yield('content')
     </main>
 
