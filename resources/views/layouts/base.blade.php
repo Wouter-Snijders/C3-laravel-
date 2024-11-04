@@ -23,7 +23,7 @@
 <body class="bg-gray-100 text-gray-900">
 
     <!-- Header -->
-    <header class="bg-gray-800 text-yellow-400 py-4 shadow-md">
+    <header class="bg-gray-800 text-yellow-400 py-4 shadow-md shadow-lg py-9">
         <div class="container mx-auto flex items-center justify-between px-4">
             <div class="flex items-center">
                 <a href="/"><img src="{{ asset('images/logo.png') }}" alt="GianoPlaats Logo" class="w-20 h-auto"></a>

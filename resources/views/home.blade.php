@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-
     <!-- Main Content -->
     <main class="container mx-auto py-8 px-4">
         <!-- Inleiding van het toernooi -->
@@ -22,18 +21,36 @@
                 <div class="flex items-center justify-center space-x-8">
                     <!-- Club 1 -->
                     <div class="text-center">
-                        <p class="text-xl font-bold">Club 1</p>
-                        <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
-                            <img src="/path/to/club1-logo.png" alt="Club 1 Logo" class="h-24 w-24">
-                        </div>
+                        @if(isset($teams[0]))
+                            <p class="text-xl font-bold">{{ $teams[0]->name }}</p>
+                            <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
+                                @if($teams[0]->logo_path)
+                                    <img src="{{ asset($teams[0]->logo_path) }}" alt="{{ $teams[0]->name }} Logo" class="h-24 w-24">
+                                @endif
+                            </div>
+                        @else
+                            <p class="text-xl font-bold">Team 1</p>
+                            <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
+                                <span class="text-gray-500">No Logo</span>
+                            </div>
+                        @endif
                     </div>
                     <p class="text-xl font-semibold">vs</p>
                     <!-- Club 2 -->
                     <div class="text-center">
-                        <p class="text-xl font-bold">Club 2</p>
-                        <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
-                            <img src="/path/to/club2-logo.png" alt="Club 2 Logo" class="h-24 w-24">
-                        </div>
+                        @if(isset($teams[1]))
+                            <p class="text-xl font-bold">{{ $teams[1]->name }}</p>
+                            <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
+                                @if($teams[1]->logo_path)
+                                    <img src="{{ asset($teams[1]->logo_path) }}" alt="{{ $teams[1]->name }} Logo" class="h-24 w-24">
+                                @endif
+                            </div>
+                        @else
+                            <p class="text-xl font-bold">Team 2</p>
+                            <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
+                                <span class="text-gray-500">No Logo</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -53,18 +70,24 @@
                     <div class="bg-white shadow-md rounded-lg p-6 relative">
                         <h3 class="text-xl font-semibold mb-4">Stand</h3>
                         <ul class="space-y-2">
-                            <li>1. Club 1</li>
-                            <li>2. Club 2</li>
-                            <li>3. Club 3</li>
-                            <li>4. Club 4</li>
-                            <li>5. Club 5</li>
+                            @forelse($teams as $index => $team)
+                                <li class="flex items-center space-x-2">
+                                    <span>{{ $index + 1 }}.</span>
+                                    @if($team->logo_path)
+                                        <img src="{{ asset($team->logo_path) }}" alt="{{ $team->name }} Logo" class="h-6 w-6">
+                                    @endif
+                                    <span>{{ $team->name }}</span>
+                                </li>
+                            @empty
+                                <li>Geen teams beschikbaar</li>
+                            @endforelse
                         </ul>
                     </div>
                 </a>
 
                 <!-- Admin Panel Section -->
                 @if(Auth::check())
-                    <a href="{{ route('admin.panel') }}" class="block transform transition-transform hover:scale-105">
+                    <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-105">
                         <div class="bg-white shadow-md rounded-lg p-6 relative">
                             <h3 class="text-xl font-semibold mb-4">Admin Panel</h3>
                             <p>Beheer opties komen hier voor admins en teamleiders.</p>

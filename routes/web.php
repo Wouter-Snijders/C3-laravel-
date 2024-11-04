@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvertentieController;
+use App\Http\Controllers\TeamController;
 
 /*
 |----------------------------------------------------------------------
@@ -61,9 +62,18 @@ Route::get('/stand', function () {
 })->name('stand');
 
 // Admin panel route
-Route::get('/admin/panel', function () {
-    return view('admin.panel');
-})->name('admin.panel');
+Route::get('/admin', function () {
+    return view('admin');
+})->name('admin');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// routes/web.php
+Route::middleware(['auth'])->group(function () {
+    Route::post('/teams', [TeamController::class, 'store'])->name('team.store');
+    Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
+    Route::put('/teams/{team}', [TeamController::class, 'update'])->name('team.update');
+});
 
 // Auth routes
 require __DIR__.'/auth.php';
