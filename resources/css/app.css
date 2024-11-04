@@ -18,3 +18,67 @@ footer {
     margin-top: 20px; /* Voeg een kleine ruimte toe boven de footer */
 }
 
+/* Initial overlay background */
+#intro-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0e403f, #193c6a);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    height: 100vh;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.intro-text {
+    font-size: 3rem;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: fadeInScale 1.5s forwards;
+}
+
+.intro-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #FFC107;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    opacity: 0;
+    animation: fadeInScale 2s forwards;
+}
+
+/* Keyframes for text and button animation */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade out overlay */
+#intro-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Show main content after animation */
+#main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+#main-content.show {
+    display: block;
+    opacity: 1;
+}
