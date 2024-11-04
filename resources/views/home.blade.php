@@ -14,18 +14,21 @@
         </section>
 
         <div class="container mx-auto py-8">
-
             <!-- Countdown to Next Match -->
             <div class="bg-white shadow-md rounded-lg p-6 mb-8 text-center">
                 <h2 class="text-2xl font-semibold mb-4">Tijd tot wedstrijd</h2>
                 <div class="flex items-center justify-center space-x-8">
                     <!-- Club 1 -->
                     <div class="text-center">
-                        @if(isset($teams[0]))
+                        @if(isset($teams) && $teams->isNotEmpty() && isset($teams[0]))
                             <p class="text-xl font-bold">{{ $teams[0]->name }}</p>
                             <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
                                 @if($teams[0]->logo_path)
-                                    <img src="{{ asset($teams[0]->logo_path) }}" alt="{{ $teams[0]->name }} Logo" class="h-24 w-24">
+                                    <img src="{{ asset($teams[0]->logo_path) }}"
+                                         alt="{{ $teams[0]->name }} Logo"
+                                         class="h-24 w-24 object-contain">
+                                @else
+                                    <span class="text-gray-500">No Logo</span>
                                 @endif
                             </div>
                         @else
@@ -35,14 +38,20 @@
                             </div>
                         @endif
                     </div>
+
                     <p class="text-xl font-semibold">vs</p>
+
                     <!-- Club 2 -->
                     <div class="text-center">
-                        @if(isset($teams[1]))
+                        @if(isset($teams) && $teams->isNotEmpty() && isset($teams[1]))
                             <p class="text-xl font-bold">{{ $teams[1]->name }}</p>
                             <div class="bg-gray-200 rounded-lg h-32 w-32 mx-auto flex items-center justify-center">
                                 @if($teams[1]->logo_path)
-                                    <img src="{{ asset($teams[1]->logo_path) }}" alt="{{ $teams[1]->name }} Logo" class="h-24 w-24">
+                                    <img src="{{ asset($teams[1]->logo_path) }}"
+                                         alt="{{ $teams[1]->name }} Logo"
+                                         class="h-24 w-24 object-contain">
+                                @else
+                                    <span class="text-gray-500">No Logo</span>
                                 @endif
                             </div>
                         @else
@@ -61,7 +70,7 @@
                 <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-105">
                     <div class="bg-white shadow-md rounded-lg p-6 relative">
                         <h3 class="text-xl font-semibold mb-4">Inzetten</h3>
-                        <p>denk jij dat je het best kan voorspellen? zet je munten slim in en wordt de beste van de school!</p>
+                        <p>Denk jij dat je het best kan voorspellen? Zet je munten slim in en wordt de beste van de school!</p>
                     </div>
                 </a>
 
@@ -70,30 +79,34 @@
                     <div class="bg-white shadow-md rounded-lg p-6 relative">
                         <h3 class="text-xl font-semibold mb-4">Stand</h3>
                         <ul class="space-y-2">
-                            @forelse($teams as $index => $team)
-                                <li class="flex items-center space-x-2">
-                                    <span>{{ $index + 1 }}.</span>
-                                    @if($team->logo_path)
-                                        <img src="{{ asset($team->logo_path) }}" alt="{{ $team->name }} Logo" class="h-6 w-6">
-                                    @endif
-                                    <span>{{ $team->name }}</span>
-                                </li>
-                            @empty
+                            @if(isset($teams) && $teams->isNotEmpty())
+                                @foreach($teams as $index => $team)
+                                    <li class="flex items-center space-x-2">
+                                        <span>{{ $index + 1 }}.</span>
+                                        @if($team->logo_path)
+                                            <img src="{{ asset($team->logo_path) }}"
+                                                 alt="{{ $team->name }} Logo"
+                                                 class="h-6 w-6 object-contain">
+                                        @endif
+                                        <span>{{ $team->name }}</span>
+                                    </li>
+                                @endforeach
+                            @else
                                 <li>Geen teams beschikbaar</li>
-                            @endforelse
+                            @endif
                         </ul>
                     </div>
                 </a>
 
                 <!-- Admin Panel Section -->
-                @if(Auth::check())
+                @auth
                     <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-105">
                         <div class="bg-white shadow-md rounded-lg p-6 relative">
                             <h3 class="text-xl font-semibold mb-4">Admin Panel</h3>
                             <p>Beheer opties komen hier voor admins en teamleiders.</p>
                         </div>
                     </a>
-                @endif
+                @endauth
             </div>
         </div>
     </main>
