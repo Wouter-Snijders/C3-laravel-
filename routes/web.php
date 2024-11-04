@@ -50,5 +50,20 @@ Route::get('/winkelmand', [CartController::class, 'index']);
 // Favorieten route
 Route::get('/favorieten', [ProductController::class, 'favorieten'])->name('favorieten');
 
+// Speelschema route
+Route::get('/speelschema', function () {
+    return view('speelschema');
+})->name('speelschema');
+
+// Standings route
+Route::get('/stand', function () {
+    return view('stand');
+})->name('stand');
+
+// Admin panel route
+Route::get('/admin/panel', function () {
+    return view('admin.panel');
+})->name('admin.panel');
+
 // Auth routes
 require __DIR__.'/auth.php';
