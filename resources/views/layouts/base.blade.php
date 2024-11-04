@@ -64,14 +64,14 @@
         <div class="container mx-auto text-center">
             <p>&copy; {{ date('Y') }} Voetbal Toernooi. Alle rechten voorbehouden.</p>
             <div class="flex justify-center space-x-4 mt-2">
-                <a href="https://x.com/curioonderwijs" class="hover:text-yellow-300 transition-all">
-                    <i class="fab fa-twitter"></i>
+                <a href="https://x.com/curioonderwijs" class="hover:text-yellow-300 transition-transform transform hover:scale-110">
+                    <i class="fa-brands fa-twitter"></i>
                 </a>
-                <a href="https://www.instagram.com/curioonderwijsgroep/" class="hover:text-yellow-300 transition-all">
-                    <i class="fab fa-instagram"></i>
+                <a href="https://www.instagram.com/curioonderwijsgroep/" class="hover:text-yellow-300 transition-transform transform hover:scale-110">
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="https://www.facebook.com/curioonderwijs/?locale=nl_NL" class="hover:text-yellow-300 transition-all">
-                    <i class="fab fa-facebook"></i>
+                <a href="https://www.facebook.com/curioonderwijs/?locale=nl_NL" class="hover:text-yellow-300 transition-transform transform hover:scale-110">
+                    <i class="fa-brands fa-facebook"></i>
                 </a>
             </div>
         </div>
