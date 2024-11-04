@@ -75,5 +75,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/teams/{team}', [TeamController::class, 'update'])->name('team.update');
 });
 
+Route::get('/inzet', function () {
+    return view('inzet');
+})->name('inzet');
+
 // Auth routes
 require __DIR__.'/auth.php';

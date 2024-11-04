@@ -31,9 +31,9 @@
             </div>
             <nav>
                 <ul class="flex space-x-4">
-                    <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Stand</a></li>
-                    <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Speel schema</a></li>
-                    <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
+                    <li><a href="{{ route('stand') }}" class="nav-link hover:text-yellow-300 transition-all">Stand</a></li>
+                    <li><a href="{{ route('speelschema') }}" class="nav-link hover:text-yellow-300 transition-all">Speel schema</a></li>
+                    <li><a href="{{ route('inzet')}}" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
 
                     @if(Auth::check())
                         <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
