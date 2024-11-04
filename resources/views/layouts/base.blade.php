@@ -36,7 +36,7 @@
                     <li><a href="{{ route('inzet')}}" class="nav-link hover:text-yellow-300 transition-all">Inzetten</a></li>
 
                     @if(Auth::check())
-                        <li><a href="#" class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
+                        <li><a href="{{ route('admin') }}"  class="nav-link hover:text-yellow-300 transition-all">Admin Panel</a></li>
                         <li class="flex items-center">
                             <span class="mr-2">{{ Auth::user()->name }}</span>
                             <a href="{{ route('logout') }}" class="text-yellow-400 hover:text-yellow-300 transition-all"
