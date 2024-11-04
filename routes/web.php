@@ -65,5 +65,9 @@ Route::get('/admin/panel', function () {
     return view('admin.panel');
 })->name('admin.panel');
 
+Route::get('/inzet', function () {
+    return view('inzet');
+})->name('inzet');
+
 // Auth routes
 require __DIR__.'/auth.php';

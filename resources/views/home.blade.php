@@ -41,10 +41,10 @@
             <!-- Schedule, Standings, Admin Panel -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Schedule/Inzetten Section -->
-                <a href="{{ route('speelschema') }}" class="block transform transition-transform hover:scale-105">
+                <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-105">
                     <div class="bg-white shadow-md rounded-lg p-6 relative">
-                        <h3 class="text-xl font-semibold mb-4">Speel schema / Inzetten</h3>
-                        <p>Details van speel schema en inzetten komen hier.</p>
+                        <h3 class="text-xl font-semibold mb-4">Inzetten</h3>
+                        <p>denk jij dat je het best kan voorspellen? zet je munten slim in en wordt de beste van de school!</p>
                     </div>
                 </a>
 
