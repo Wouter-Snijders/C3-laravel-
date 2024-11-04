@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 /* Zorg dat de footer altijd onderaan blijft, zelfs als de content kort is */
+html, body {
+    height: 100%; /* Zorg ervoor dat html en body de volledige hoogte van het scherm hebben */
+    margin: 0; /* Verwijder standaard marges */
+}
+
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Minstens de volledige hoogte van het scherm */
 }
 
 main {

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvertentieController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\StandController;
 
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -59,6 +60,9 @@ Route::get('/stand', function () {
 Route::get('/inzet', function () {
     return view('inzet');
 })->name('inzet');
+
+// Route voor de standenpagina
+Route::get('/stand', [StandController::class, 'index'])->name('stand');
 
 // Auth routes
 require __DIR__.'/auth.php';
