@@ -66,6 +66,47 @@
         nav a:hover {
             color: #3b82f6; /* Koud blauw als hover kleur */
         }
+
+        .shine {
+    font-size: 1.3em;
+    font-weight: 1000;
+    color: rgba(255, 255, 255, 0.703);
+    background: #222 -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222),
+        to(#222),
+        color-stop(0.9, #fff)
+      ) 0 0 no-repeat;
+    background-image: -webkit-linear-gradient(
+      -40deg,
+      transparent 0%,
+      transparent 40%,
+      #fff 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-background-size: 50px;
+    -webkit-animation: zezzz;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+  }
+  @-webkit-keyframes zezzz {
+    0%,
+    10% {
+      background-position: -200px;
+    }
+    20% {
+      background-position: top left;
+    }
+    100% {
+      background-position: 200px;
+    }
+  }
+
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 font-poppins">
@@ -76,7 +117,12 @@
                 <a href="/">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-20 h-auto" />
                 </a>
-                <h1 class="text-2xl font-bold ml-2">Voetbal Frontier</h1>
+                <h1 class="text-2xl font-bold ml-2 shine">
+                    <span id="typed-title"></span>
+                    <div class="shine">Voetbal Frontier</div>
+                </h1>
+
+
             </div>
             <nav>
                 <ul class="flex space-x-6">
@@ -133,6 +179,8 @@
             </a>
         </div>
     </footer>
+
+
 
 
 </body>
