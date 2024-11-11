@@ -12,11 +12,6 @@ use App\Http\Controllers\StandController;
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Dashboard route
-Route::get('/dashboard', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // Authenticated routes
 Route::middleware('auth')->group(function () {
     // Profile routes

@@ -14,17 +14,17 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-50">
-    <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
+<body>
+    <div class="min-h-screen">
         <!-- Logo bovenaan -->
-        <div class="text-center mb-8 animate__animated animate__fadeIn animate__delay-1s">
+        <div class="logo-container">
             <a href="/">
-                <img src="{{ asset('images/logo.png') }}" class="w-20 h-20 mx-auto" alt="Logo" />
+                <img src="{{ asset('images/logo.png') }}" class="logo" alt="Logo" />
             </a>
         </div>
 
         <!-- Formuliercontainer in het midden van het scherm -->
-        <div class="w-full sm:max-w-md mt-6 px-6 py-8 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col animate__animated animate__fadeIn animate__delay-2s">
+        <div class="form-container">
             {{ $slot }}
         </div>
     </div>
@@ -32,8 +32,10 @@
     <style>
         /* Basis achtergrond en lettertype */
         body {
-            background-color: #f3f4f6;
+            background-color: #1F2937; /* Donkergrijze achtergrond */
             font-family: 'Figtree', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         /* Stijlen voor de container van de loginpagina */
@@ -42,44 +44,100 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            height: 100vh;
+        }
+
+        /* Stijlen voor de logo-container */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo {
+            width: 120px; /* Groter logo */
+            height: 120px;
         }
 
         /* Stijlen voor de formuliercontainer */
-        .w-full {
-            max-width: 400px;
+        .form-container {
             width: 100%;
-            background-color: white;
+            max-width: 400px;
             padding: 30px;
+            background-color: #2D3748; /* Donkergrijze achtergrond voor formuliercontainer */
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Schaduw voor container */
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         /* Knoppen en interactie-elementen */
         .primary-button {
-            background-color: #10B981; /* Groene kleur */
+            background-color: #15231e; /* Groene kleur */
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
+            padding: 14px 28px; /* Grotere knoppen met padding */
+            font-size: 1.1rem; /* Grotere tekst */
+            font-weight: 600; /* Dikkere tekst */
+            border-radius: 8px; /* Iets afgeronde hoeken */
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Toevoegen van animatie voor hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Schaduw voor knop */
         }
 
         .primary-button:hover {
-            background-color: #059669; /* Donkere groene hoverkleur */
+            background-color: #5e3737; /* Donkere groene hoverkleur */
+            transform: translateY(-2px); /* Kleine beweging omhoog bij hover */
         }
+
+        /* Wachtwoord vergeten knop */
+.forgot-password {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.forgot-password a {
+    color: #E2E8F0; /* Lichte tekstkleur */
+    font-size: 1rem; /* Normale tekstgrootte */
+    font-weight: 500; /* Medium gewicht */
+    text-decoration: none;
+    position: relative; /* Voor animatie-effect */
+    display: inline-block; /* Zorgt ervoor dat de animatie goed werkt */
+    transition: color 0.3s ease; /* Vloeibare overgang voor kleurverandering */
+}
+
+.forgot-password a:hover {
+    color: #10B981; /* Groene kleur bij hover */
+}
+
+.forgot-password a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #10B981; /* Groene lijn onder de tekst */
+    transform: scaleX(0); /* Maakt de lijn in het begin onzichtbaar */
+    transform-origin: bottom right; /* Start animatie vanaf de rechterkant */
+    transition: transform 0.3s ease; /* Vloeiende animatie */
+}
+
+.forgot-password a:hover::after {
+    transform: scaleX(1); /* Laat de lijn groeien naar de volledige breedte bij hover */
+    transform-origin: bottom left; /* Laat de lijn van links naar rechts groeien */
+}
 
         /* Inputvelden */
         .input-background {
-            background-color: #F1F5F9; /* Lichtgrijze achtergrond voor inputvelden */
-            color: #1F2937; /* Zwarte tekstkleur */
-            padding: 10px;
-            border: 1px solid #D1D5DB; /* Grijze randkleur */
+            background-color: #4A5568; /* Donkergrijze achtergrond voor inputvelden */
+            color: #E2E8F0; /* Lichtgrijze tekstkleur */
+            padding: 12px; /* Grotere padding */
+            border: 1px solid #2D3748; /* Donkergrijze randkleur */
             border-radius: 5px;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 12px; /* Grotere marge tussen de velden */
+            font-size: 1rem; /* Grotere tekst voor de invoervelden */
         }
 
         /* Foutberichten */
@@ -91,7 +149,9 @@
 
         /* Titel en tekstlabels */
         .text-black {
-            color: #111827;
+            color: #E2E8F0; /* Lichtgrijze tekstkleur voor titel */
+            font-size: 1.25rem; /* Grotere tekst voor titels */
+            font-weight: 700; /* Dikkere tekst voor de titel */
         }
 
         /* Hover effect voor links */
@@ -99,8 +159,11 @@
             color: #10B981;
         }
 
-        /* Toegevoegde animaties voor fade-in effecten */
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+        /* Animatie voor fade-in effecten */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
     </style>
 </body>
 </html>
