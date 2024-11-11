@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <main class="container mx-auto py-8 px-4">
         <!-- Inleiding van het toernooi -->
-        <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 mb-8 max-w-4xl mx-auto">
+        <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transition-all duration-300 mb-8 max-w-4xl mx-auto">
             <h2 class="text-3xl font-extrabold mb-4 text-transparent bg-clip-text" style="background-color: #18978a;">
                 Wat is het FFI?
             </h2>
