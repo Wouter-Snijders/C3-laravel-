@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+
 /* Zorg dat de footer altijd onderaan blijft, zelfs als de content kort is */
 html, body {
     height: 100%; /* Zorg ervoor dat html en body de volledige hoogte van het scherm hebben */
