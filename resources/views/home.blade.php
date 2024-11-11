@@ -5,7 +5,7 @@
     <main class="container mx-auto py-8 px-4">
         <!-- Inleiding van het toernooi -->
         <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 mb-8 max-w-4xl mx-auto">
-            <h2 class="text-3xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
+            <h2 class="text-3xl font-extrabold mb-4 text-transparent bg-clip-text" style="background-color: #18978a;">
                 Wat is het FFI?
             </h2>
             <p class="text-lg leading-relaxed">
@@ -18,7 +18,7 @@
         <div class="container mx-auto py-8">
             <!-- Countdown to Next Match -->
             <div class="bg-gray-900 text-gray-100 rounded-lg p-8 mb-12 text-center">
-                <h2 class="text-3xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400  to-teal-500">Tijd tot wedstrijd</h2>
+                <h2 class="text-3xl font-extrabold mb-6 text-transparent bg-clip-text" style="background-image: linear-gradient(#18978a, #18978a);">Tijd tot wedstrijd</h2>
                 <div class="flex items-center justify-center space-x-12">
                     <!-- Club 1 -->
                     <div class="text-center group transform transition-all duration-300 ease-in-out">

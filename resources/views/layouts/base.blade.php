@@ -91,21 +91,21 @@
             </div>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="{{ route('stand') }}" class="text-gray-200 hover:text-gray-400 transition-all">Stand</a></li>
-                    <li><a href="{{ route('speelschema') }}" class="text-gray-200 hover:text-gray-400 transition-all">Speelschema</a></li>
-                    <li><a href="{{ route('inzet') }}" class="text-gray-200 hover:text-gray-400 transition-all">Inzetten</a></li>
+                    <li><a href="{{ route('stand') }}" class="text-gray-200 hover:text-custom-hover transition-all">Stand</a></li>
+                    <li><a href="{{ route('speelschema') }}" class="text-gray-200 hover:text-custom-hover transition-all">Speelschema</a></li>
+                    <li><a href="{{ route('inzet') }}" class="text-gray-200 hover:text-custom-hover transition-all">Inzetten</a></li>
                     @if(Auth::check())
-                        <li><a href="{{ route('admin') }}" class="text-gray-200 hover:text-gray-400 transition-all">Admin Panel</a></li>
+                        <li><a href="{{ route('admin') }}" class="text-gray-200 hover:text-custom-hover transition-all">Admin Panel</a></li>
                         <li class="flex items-center">
                             <span class="mr-2 text-gray-200">{{ Auth::user()->name }}</span>
-                            <a href="{{ route('logout') }}" class="text-gray-200 hover:text-gray-400 transition-all" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
+                            <a href="{{ route('logout') }}" class="text-gray-200 hover:text-custom-hover transition-all" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </li>
                     @else
-                        <li><a href="{{ route('login') }}" class="text-gray-200 hover:text-gray-400 transition-all">Inloggen</a></li>
-                        <li><a href="{{ route('register') }}" class="text-gray-200 hover:text-gray-400 transition-all">Registreren</a></li>
+                        <li><a href="{{ route('login') }}" class="text-gray-200 hover:text-custom-hover transition-all">Inloggen</a></li>
+                        <li><a href="{{ route('register') }}" class="text-gray-200 hover:text-custom-hover transition-all">Registreren</a></li>
                     @endif
                 </ul>
             </nav>
