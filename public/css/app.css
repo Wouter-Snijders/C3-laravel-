@@ -132,3 +132,13 @@ footer {
       background-position: 200px;
     }
   }
+
+/* Original background */
+.background-gradient {
+    background: linear-gradient(to right, #222, #222 90%, #fff 90%);
+}
+
+/* Hover effect */
+.background-gradient:hover {
+    background: linear-gradient(to right, #dae369, #dae369 90%, #fff 90%);
+}
