@@ -69,16 +69,16 @@
             <!-- Schedule, Standings, Admin Panel -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Schedule/Inzetten Section -->
-                <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-102 rounded-lg">
-                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 transition-all duration-300">
+                <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
                         <h3 class="text-2xl font-semibold mb-6">Inzetten</h3>
                         <p>Denk jij dat je het best kan voorspellen? Zet je munten slim in en wordt de beste van de school!</p>
                     </div>
                 </a>
 
                 <!-- Standings Section -->
-                <a href="{{ route('stand') }}" class="block transform transition-transform hover:scale-102 rounded-lg">
-                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 transition-all duration-300">
+                <a href="{{ route('stand') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
                         <h3 class="text-2xl font-semibold mb-6">Stand</h3>
                         <ul class="space-y-4">
                             @if(isset($teams) && $teams->isNotEmpty())
@@ -102,8 +102,8 @@
 
                 <!-- Admin Panel Section -->
                 @auth
-                    <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-102 rounded-lg">
-                        <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 transition-all duration-300">
+                    <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                        <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
                             <h3 class="text-2xl font-semibold mb-6">Admin Panel</h3>
                             <p>Beheer opties komen hier voor admins en teamleiders.</p>
                         </div>
