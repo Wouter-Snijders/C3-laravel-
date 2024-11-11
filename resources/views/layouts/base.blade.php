@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voetbal Toernooi</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         /* Aangepaste stijlen voor animaties */
         .transition-all {
@@ -66,6 +68,10 @@
         nav a:hover {
             color: #3b82f6; /* Koud blauw als hover kleur */
         }
+
+
+
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 font-poppins">
@@ -76,7 +82,12 @@
                 <a href="/">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-20 h-auto" />
                 </a>
-                <h1 class="text-2xl font-bold ml-2">Voetbal Frontier</h1>
+                <h1 class="text-2xl font-bold ml-2 shine">
+                    <span id="typed-title"></span>
+                    <div class="shine">Voetbal Frontier</div>
+                </h1>
+
+
             </div>
             <nav>
                 <ul class="flex space-x-6">
@@ -133,6 +144,8 @@
             </a>
         </div>
     </footer>
+
+
 
 
 </body>
