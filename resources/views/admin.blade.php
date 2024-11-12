@@ -1,6 +1,4 @@
-@extends('layouts.base')
-
-@section('content')
+<x-base-layout>
     @auth
         <main class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-white">Admin Panel</h1>
@@ -178,4 +176,4 @@
             </div>
         </div>
     @endauth
-@endsection
+</x-base-layout>
