@@ -9,67 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
-        /* Aangepaste stijlen voor animaties */
-        .transition-all {
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-        }
-        /* Titel animatie */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                color: rgb(222, 215, 215); /* Oorspronkelijke kleur */
-            }
-            50% {
-                transform: scale(1.1);
-                color: rgb(137, 137, 137); /* Lichtere kleur tijdens animatie */
-            }
-        }
-        .animated-title {
-            animation: pulse 2s infinite;
-        }
-
-        /* Prevent overflow */
-        body {
-            overflow-x: hidden; /* Verhindert horizontale scrollbars */
-        }
-
-        /* Custom hover effects */
-        .scale-up {
-            transition: transform 0.3s ease-in-out;
-        }
-        .scale-up:hover {
-            transform: scale(1.05);
-        }
-
-        /* Fade-in animation */
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* Shadow effect on hover */
-        .shadow-hover:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Donkerblauwe header achtergrond */
-        header {
-            background-color: #1e3a8a; /* Donkerblauw */
-        }
-
-
-        .text-gray-200:hover:not(#footerText) {
-            color: #dae369 !important;
-        }
-
-
 
     </style>
 </head>
