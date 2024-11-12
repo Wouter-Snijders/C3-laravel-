@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-
-    </style>
-</head>
+    <x-head :title="$title ?? 'Voetbal Frontier'"></x-head>
 <body class="bg-gray-900 text-gray-100 font-poppins">
 
     <header class="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 text-gray-200 py-4 font-sans tracking-wide shadow-lg">
