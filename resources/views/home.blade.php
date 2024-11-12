@@ -72,7 +72,7 @@
                 <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
                     <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
                         <h3 class="text-2xl font-semibold mb-6">Inzetten</h3>
-                        <p>Denk jij dat je het best kan voorspellen? Zet je munten slim in en wordt de beste van de school!</p>
+                        <p>Download de applicatie! en Zet je munten slim in en wordt de beste van de school!</p>
                     </div>
                 </a>
 
