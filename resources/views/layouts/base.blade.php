@@ -64,7 +64,7 @@
 
     <!-- Main content -->
     <main class="container mx-auto py-8 px-4 bg-gray-800 border-t-2 border-gray-600 fade-in">
-        @yield('content')
+        {{ $slot }}
     </main>
 
     <footer class="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 text-gray-200 font-sans tracking-wide py-12 px-12 mt-8">
