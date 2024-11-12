@@ -32,7 +32,7 @@
                             <input type="text" name="team_name" id="team_name" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-white bg-gray-700" required>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-300" for="dropzone">Team Logo</label>
+                            <label class="block text-sm font-medium text-gray-300" for="dropzone">Team Logo (met transparante achtergrond a.u.b)</label>
                             <div class="w-full relative border-2 border-gray-600 border-dashed rounded-lg p-6 bg-gray-700" id="dropzone">
                                 <input type="file" name="team_logo" id="file-upload" class="absolute inset-0 w-full h-full opacity-0 z-50" accept="image/*" required />
                                 <div class="text-center">
