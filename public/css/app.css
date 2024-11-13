@@ -13,6 +13,7 @@ body {
     flex-direction: column;
     background-color: #1F2937;
     font-family: 'Figtree', sans-serif;
+    color: white;
 }
 
 main {
