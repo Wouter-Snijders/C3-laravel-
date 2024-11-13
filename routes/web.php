@@ -9,6 +9,7 @@ use App\Http\Controllers\AdvertentieController;
 use App\Http\Controllers\TeamLeiderController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\RefController;
+use App\Http\Controllers\AdminController;
 
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -62,6 +63,16 @@ Route::get('/stand', [StandController::class, 'index'])->name('stand');
 Route::get('/inzet', function () {
     return view('inzet');
 })->name('inzet');
+
+// Admin routes
+Route::middleware(['auth', 'can:admin-access'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin'); // Admin dashboard
+    Route::put('/admin/users/{id}/rank', [AdminController::class, 'updateRank'])->name('admin.updateRank'); // Update user rank
+    Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+
+});
+
+
 
 // Auth routes
 require __DIR__.'/auth.php';

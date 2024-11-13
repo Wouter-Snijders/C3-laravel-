@@ -101,19 +101,27 @@
                     </div>
                 </a>
 
-                <!-- Teamleider Panel Section, only visible to team leaders -->
+                <!-- Teamleider Panel Section -->
                 @auth
-            @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
-                <a href="{{ route('teamleider') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
-                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
-                        <h3 class="text-2xl font-semibold mb-6">Teamleider Panel</h3>
-                        <p>Beheer opties komen hier voor admins en teamleiders.</p>
-                    </div>
-                </a>
-            @else
-                <p>Je hebt geen toegang tot het teamleider panel.</p>
-            @endif
-        @endauth
+                    @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
+                        <a href="{{ route('teamleider') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                            <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
+                                <h3 class="text-2xl font-semibold mb-6">Teamleider Panel</h3>
+                                <p>Beheer opties komen hier voor admins en teamleiders.</p>
+                            </div>
+                        </a>
+                    @endif
+
+                    <!-- Admin Panel Section -->
+                    @if(auth()->user()->rank === 'admin')
+                        <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                            <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
+                                <h3 class="text-2xl font-semibold mb-6">Admin Panel</h3>
+                                <p>Beheer accounts en pas gebruikersrangen aan.</p>
+                            </div>
+                        </a>
+                    @endif
+                @endauth
             </div>
         </div>
     </main>
