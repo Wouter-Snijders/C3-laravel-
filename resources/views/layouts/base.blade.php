@@ -72,7 +72,7 @@
             <div class="flex flex-wrap items-center sm:justify-between max-sm:flex-col gap-6">
                 <div>
                     <a href="/">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-44" />
+
                     </a>
                 </div>
             </div>
