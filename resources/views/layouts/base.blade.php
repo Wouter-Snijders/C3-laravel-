@@ -23,27 +23,30 @@
                     <li><a href="{{ route('inzet') }}" class="text-gray-200 transition-all" style="color: gray;">Inzetten</a></li>
 
                     @if(Auth::check())
-                        <li><a href="{{ route('teamleider') }}" class="text-gray-200 transition-all" style="color: gray;">Admin Panel</a></li>
-                        <li class="relative flex items-center">
-                            <span class="mr-2 text-gray-200 cursor-pointer" onclick="toggleLogout()" id="user-name">
-                                <i class="fas fa-user-circle mr-2"></i> {{ Auth::user()->name }}
-                            </span>
-                            <a href="{{ route('logout') }}"
-                               class="text-gray-200 transition-all opacity-0 pointer-events-none absolute"
-                               style="top: 100%; color: gray; transition: opacity 0.3s ease;"
-                               id="logout-link"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Uitloggen
-                            </a>
+    @if(Auth::user()->rank === 'teamleider' || Auth::user()->rank === 'admin')
+        <li><a href="{{ route('teamleider') }}" class="text-gray-200 transition-all" style="color: gray;">Admin Panel</a></li>
+    @endif
+    <li class="relative flex items-center">
+        <span class="mr-2 text-gray-200 cursor-pointer" onclick="toggleLogout()" id="user-name">
+            <i class="fas fa-user-circle mr-2"></i> {{ Auth::user()->name }}
+        </span>
+        <a href="{{ route('logout') }}"
+           class="text-gray-200 transition-all opacity-0 pointer-events-none absolute"
+           style="top: 100%; color: gray; transition: opacity 0.3s ease;"
+           id="logout-link"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Uitloggen
+        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    @else
-                        <li><a href="{{ route('login') }}" class="text-gray-200 transition-all" style="color: gray;">Inloggen</a></li>
-                        <li><a href="{{ route('register') }}" class="text-gray-200 transition-all" style="color: gray;">Registreren</a></li>
-                    @endif
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    </li>
+@else
+    <li><a href="{{ route('login') }}" class="text-gray-200 transition-all" style="color: gray;">Inloggen</a></li>
+    <li><a href="{{ route('register') }}" class="text-gray-200 transition-all" style="color: gray;">Registreren</a></li>
+@endif
+
                 </ul>
             </nav>
 
