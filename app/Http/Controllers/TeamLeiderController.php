@@ -5,14 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
-class TeamController extends Controller
+class TeamLeiderController extends Controller
 {
+    // Constructor om autorisatie toe te voegen
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            // Controleer of de gebruiker is ingelogd en of de gebruiker een 'teamleider' of 'admin' is
+            if (auth()->check() && (auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')) {
+                return $next($request);
+            }
+
+            // Als de gebruiker geen toegangsrechten heeft, stuur terug naar home
+            return redirect()->route('home')->with('error', 'Je hebt geen toegang tot deze pagina.');
+        });
+    }
+
+    // Toon alle teams
     public function index()
     {
         $teams = Team::all();
-        return view('admin', compact('teams'));
+        return view('teamleider', compact('teams'));
     }
 
+    // Voeg een nieuw team toe
     public function store(Request $request)
     {
         $request->validate([
@@ -25,6 +41,7 @@ class TeamController extends Controller
             $logoPath = 'images/' . time() . '.' . $request->team_logo->extension();
             $request->team_logo->move(public_path('images'), $logoPath);
 
+            // Maak het nieuwe team aan
             Team::create([
                 'name' => $request->team_name,
                 'logo_path' => $logoPath
@@ -36,6 +53,7 @@ class TeamController extends Controller
         return back()->with('error', 'Er ging iets mis bij het uploaden van het logo.');
     }
 
+    // Verwijder een team
     public function destroy(Team $team)
     {
         if ($team->logo_path) {
@@ -48,6 +66,7 @@ class TeamController extends Controller
         return redirect()->back()->with('success', 'Team succesvol verwijderd!');
     }
 
+    // Werk een team bij
     public function update(Request $request, Team $team)
     {
         $request->validate([

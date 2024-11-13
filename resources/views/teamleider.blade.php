@@ -1,7 +1,7 @@
 <x-base-layout>
     @auth
         <main class="container mx-auto py-8 px-4">
-            <h1 class="text-2xl font-bold mb-6 text-white">Admin Panel</h1>
+            <h1 class="text-2xl font-bold mb-6 text-white">Teamleider Panel</h1>
 
             <!-- Success Message -->
             @if(session('success'))

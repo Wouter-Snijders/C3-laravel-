@@ -4,7 +4,7 @@
     </x-slot>
     <!-- Main Content -->
     <main class="container mx-auto py-8 px-4">
-                <!-- Inleiding van het toernooi -->
+        <!-- Inleiding van het toernooi -->
         <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transition-all duration-300 mb-8 max-w-4xl mx-auto">
             <h2 class="text-3xl font-extrabold mb-4 text-transparent bg-clip-text" style="background-color: #18978a;">
                 Wat is het FFI?
@@ -101,15 +101,19 @@
                     </div>
                 </a>
 
-                <!-- Admin Panel Section -->
+                <!-- Teamleider Panel Section, only visible to team leaders -->
                 @auth
-                    <a href="{{ route('admin') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
-                        <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
-                            <h3 class="text-2xl font-semibold mb-6">Admin Panel</h3>
-                            <p>Beheer opties komen hier voor admins en teamleiders.</p>
-                        </div>
-                    </a>
-                @endauth
+            @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
+                <a href="{{ route('teamleider') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                    <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
+                        <h3 class="text-2xl font-semibold mb-6">Teamleider Panel</h3>
+                        <p>Beheer opties komen hier voor admins en teamleiders.</p>
+                    </div>
+                </a>
+            @else
+                <p>Je hebt geen toegang tot het teamleider panel.</p>
+            @endif
+        @endauth
             </div>
         </div>
     </main>

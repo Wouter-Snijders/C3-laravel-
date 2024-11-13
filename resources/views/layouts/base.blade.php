@@ -23,7 +23,7 @@
                     <li><a href="{{ route('inzet') }}" class="text-gray-200 transition-all" style="color: gray;">Inzetten</a></li>
 
                     @if(Auth::check())
-                        <li><a href="{{ route('admin') }}" class="text-gray-200 transition-all" style="color: gray;">Admin Panel</a></li>
+                        <li><a href="{{ route('teamleider') }}" class="text-gray-200 transition-all" style="color: gray;">Admin Panel</a></li>
                         <li class="relative flex items-center">
                             <span class="mr-2 text-gray-200 cursor-pointer" onclick="toggleLogout()" id="user-name">
                                 <i class="fas fa-user-circle mr-2"></i> {{ Auth::user()->name }}

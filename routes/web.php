@@ -6,8 +6,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvertentieController;
-use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamLeiderController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\RefController;
 
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,11 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/advertenties/{id}', [AdvertentieController::class, 'destroy'])->name('advertenties.destroy');
     Route::get('/mijn-advertenties', [AdvertentieController::class, 'myAdvertisements'])->name('mijn.advertenties');
 
-    // Team routes (admin only)
-    Route::get('/admin', [TeamController::class, 'index'])->name('admin');
-    Route::post('/teams', [TeamController::class, 'store'])->name('team.store');
-    Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
-    Route::put('/teams/{team}', [TeamController::class, 'update'])->name('team.update');
+    // Team routes (teamleider)
+    Route::get('/teams', [TeamLeiderController::class, 'index'])->name('teams.index'); // Teams overzicht
+    Route::post('/teams', [TeamLeiderController::class, 'store'])->name('team.store'); // Team toevoegen
+    Route::put('/teams/{team}', [TeamLeiderController::class, 'update'])->name('team.update'); // Team bijwerken
+    Route::delete('/teams/{team}', [TeamLeiderController::class, 'destroy'])->name('team.destroy'); // Team verwijderen
+
+    // Teamleider panel
+    Route::get('/teamleider', [TeamLeiderController::class, 'index'])->name('teamleider');
+
+    // Referee routes
+    Route::get('/refpanel', [RefController::class, 'index'])->name('refpanel');
+    Route::post('/scores', [RefController::class, 'store'])->name('scores.store');
 });
 
 // Cart routes
@@ -48,16 +56,12 @@ Route::get('/speelschema', function () {
 })->name('speelschema');
 
 // Standings route
-Route::get('/stand', function () {
-    return view('stand');
-})->name('stand');
+Route::get('/stand', [StandController::class, 'index'])->name('stand');
 
+// Inzet route
 Route::get('/inzet', function () {
     return view('inzet');
 })->name('inzet');
-
-// Route voor de standenpagina
-Route::get('/stand', [StandController::class, 'index'])->name('stand');
 
 // Auth routes
 require __DIR__.'/auth.php';
