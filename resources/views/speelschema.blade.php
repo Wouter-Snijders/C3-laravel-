@@ -10,7 +10,7 @@
                 Het Speelschema
             </h2>
             <p class="text-lg leading-relaxed">
-                Hier vind je de geplande wedstrijden van het Voetbal Frontier Internationaal. Klik op een wedstrijd voor meer details.
+                Hier vind je de geplande wedstrijden van de Voetbal Frontier Internationaal. Klik op een wedstrijd voor meer details.
             </p>
         </section>
 
@@ -23,7 +23,7 @@
             @foreach ($wedstrijden as $wedstrijd)
                 <div class="bg-gray-800 p-4 rounded-lg mb-4">
                     <p class="text-xl font-semibold text-gray-100">{{ $wedstrijd->team1->name }} vs {{ $wedstrijd->team2->name }}</p>
-                    <p class="text-gray-400">{{ $wedstrijd->match_date->format('d-m-Y H:i') }}</p>
+                    <p class="text-gray-400">{{ \Carbon\Carbon::parse($wedstrijd->wedstrijd_tijd)->format('d-m-Y H:i') }}</p>
                     <p class="text-gray-500">{{ $wedstrijd->location }}</p>
                 </div>
             @endforeach
