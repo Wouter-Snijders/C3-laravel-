@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // Define any policies here
     ];
 
     /**
@@ -26,6 +26,11 @@ class AuthServiceProvider extends ServiceProvider
         // Definieer een Gate voor admin-toegang
         Gate::define('admin-access', function ($user) {
             return $user->rank === 'admin';
+        });
+
+        // Eventueel: Een gate voor teamleiders
+        Gate::define('teamleider-access', function ($user) {
+            return $user->rank === 'teamleider';
         });
     }
 }

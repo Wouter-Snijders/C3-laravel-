@@ -2,6 +2,7 @@
     <x-slot name="title">
         Voetbal Frontier
     </x-slot>
+
     <!-- Main Content -->
     <main class="container mx-auto py-8 px-4">
         <!-- Inleiding van het toernooi -->
@@ -27,9 +28,7 @@
                             <p class="text-2xl font-semibold">{{ $teams[0]->name }}</p>
                             <div class="bg-gray-700 rounded-xl h-40 w-40 mx-auto flex items-center justify-center group-hover:shadow-lg transform transition-all duration-300">
                                 @if($teams[0]->logo_path)
-                                    <img src="{{ asset($teams[0]->logo_path) }} "
-                                         alt="{{ $teams[0]->name }} Logo"
-                                         class="h-24 w-24 object-contain">
+                                    <img src="{{ asset($teams[0]->logo_path) }}" alt="{{ $teams[0]->name }} Logo" class="h-24 w-24 object-contain">
                                 @else
                                     <span class="text-gray-500">No Logo</span>
                                 @endif
@@ -50,9 +49,7 @@
                             <p class="text-2xl font-semibold">{{ $teams[1]->name }}</p>
                             <div class="bg-gray-700 rounded-xl h-40 w-40 mx-auto flex items-center justify-center group-hover:shadow-lg">
                                 @if($teams[1]->logo_path)
-                                    <img src="{{ asset($teams[1]->logo_path) }} "
-                                         alt="{{ $teams[1]->name }} Logo"
-                                         class="h-24 w-24 object-contain">
+                                    <img src="{{ asset($teams[1]->logo_path) }}" alt="{{ $teams[1]->name }} Logo" class="h-24 w-24 object-contain">
                                 @else
                                     <span class="text-gray-500">No Logo</span>
                                 @endif
@@ -69,11 +66,11 @@
 
             <!-- Schedule, Standings, Admin Panel -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Schedule/Inzetten Section -->
-                <a href="{{ route('inzet') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                <!-- Schedule Section -->
+                <a href="{{ route('speelschema') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
                     <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
-                        <h3 class="text-2xl font-semibold mb-6">Inzetten</h3>
-                        <p>Download de applicatie! en Zet je munten slim in en wordt de beste van de school!</p>
+                        <h3 class="text-2xl font-semibold mb-6">Speelschema</h3>
+                        <p>Bekijk het speelschema en ontdek wanneer de wedstrijden plaatsvinden.</p>
                     </div>
                 </a>
 
@@ -87,9 +84,7 @@
                                     <li class="flex items-center space-x-4 group hover:bg-gray-800 rounded-lg p-2 transition-all duration-300">
                                         <span class="text-xl font-semibold">{{ $index + 1 }}.</span>
                                         @if($team->logo_path)
-                                            <img src="{{ asset($team->logo_path) }} "
-                                                 alt="{{ $team->name }} Logo"
-                                                 class="h-8 w-8 object-contain">
+                                            <img src="{{ asset($team->logo_path) }}" alt="{{ $team->name }} Logo" class="h-8 w-8 object-contain">
                                         @endif
                                         <span>{{ $team->name }}</span>
                                     </li>
@@ -101,13 +96,13 @@
                     </div>
                 </a>
 
-                <!-- Teamleider Panel Section -->
+                <!-- Admin & Scheids Panel Section -->
                 @auth
                     @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
-                        <a href="{{ route('teamleider') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                        <a href="{{ route('wedstrijdmaker') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
                             <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
-                                <h3 class="text-2xl font-semibold mb-6">Teamleider Panel</h3>
-                                <p>Beheer opties komen hier voor admins en teamleiders.</p>
+                                <h3 class="text-2xl font-semibold mb-6">Wedstrijdmaker Panel</h3>
+                                <p>Beheer de wedstrijden en stel de scheidsrechters in.</p>
                             </div>
                         </a>
                     @endif

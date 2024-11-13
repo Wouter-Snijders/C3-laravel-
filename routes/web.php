@@ -10,6 +10,7 @@ use App\Http\Controllers\TeamLeiderController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\RefController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WedstrijdController;
 
 // Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -52,9 +53,7 @@ Route::get('/winkelmand', [CartController::class, 'index']);
 Route::get('/favorieten', [ProductController::class, 'favorieten'])->name('favorieten');
 
 // Speelschema route
-Route::get('/speelschema', function () {
-    return view('speelschema');
-})->name('speelschema');
+Route::get('/speelschema', [WedstrijdController::class, 'speelschema'])->name('speelschema');
 
 // Standings route
 Route::get('/stand', [StandController::class, 'index'])->name('stand');
@@ -69,10 +68,26 @@ Route::middleware(['auth', 'can:admin-access'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin'); // Admin dashboard
     Route::put('/admin/users/{id}/rank', [AdminController::class, 'updateRank'])->name('admin.updateRank'); // Update user rank
     Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-
 });
 
+// Wedstrijd routes
+Route::middleware(['auth'])->group(function () {
+    // Home route: Wedstrijden ophalen en tonen
+    Route::get('/', [WedstrijdController::class, 'index'])->name('home');
 
+    // Wedstrijd gerelateerde routes
+    Route::get('wedstrijdmaker', [WedstrijdController::class, 'create'])->name('wedstrijdmaker');
+    Route::post('wedstrijdmaker', [WedstrijdController::class, 'store'])->name('wedstrijden.store');
+    Route::get('wedstrijden/{id}/edit', [WedstrijdController::class, 'edit'])->name('wedstrijden.edit');
+    Route::put('wedstrijden/{id}', [WedstrijdController::class, 'update'])->name('wedstrijden.update');
+    Route::delete('wedstrijden/{id}', [WedstrijdController::class, 'destroy'])->name('wedstrijden.destroy');
+});
+
+// Admin routes for Wedstrijden
+Route::middleware(['auth', 'can:admin-access'])->group(function () {
+    Route::get('/wedstrijdmaker', [WedstrijdController::class, 'create'])->name('wedstrijdmaker');
+    Route::post('/wedstrijdmaker', [WedstrijdController::class, 'store'])->name('wedstrijden.store');
+});
 
 // Auth routes
 require __DIR__.'/auth.php';

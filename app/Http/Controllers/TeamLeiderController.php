@@ -24,8 +24,8 @@ class TeamLeiderController extends Controller
     // Toon alle teams
     public function index()
     {
-        $teams = Team::all();
-        return view('teamleider', compact('teams'));
+        $teams = Team::all(); // Haal alle teams op
+        return view('teamleider', compact('teams')); // Geef de teams door aan de view
     }
 
     // Voeg een nieuw team toe
