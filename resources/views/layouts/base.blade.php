@@ -26,6 +26,10 @@
                             <li><a href="{{ route('admin') }}" class="text-gray-200 transition-all" style="color: gray;">Admin Panel</a></li>
                         @endif
 
+                        @if(auth()->user()->rank === 'scheidsrechter' || auth()->user()->rank === 'admin')
+                            <li><a href="{{ route('wedstrijdmaker') }}" class="text-gray-200 transition-all" style="color: gray;">Wedstrijd Panel</a></li>
+                        @endif
+
                         <!-- Teamleider Panel zichtbaar voor zowel teamleiders als admins -->
                         @if(Auth::user()->rank === 'teamleider' || Auth::user()->rank === 'admin')
                             <li><a href="{{ route('teamleider') }}" class="text-gray-200 transition-all" style="color: gray;">Teamleider Panel</a></li>
