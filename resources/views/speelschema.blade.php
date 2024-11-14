@@ -1,30 +1,46 @@
 <x-base-layout>
-    <x-slot name="title">
-        Speelschema - Voetbal Frontier
-    </x-slot>
+    <x-slot name="title">Speelschema - Voetbal Frontier</x-slot>
 
     <main class="container mx-auto py-8 px-4">
-        <!-- Inleiding van het toernooi -->
         <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transition-all duration-300 mb-8 max-w-4xl mx-auto">
             <h2 class="text-3xl font-extrabold mb-4 text-transparent bg-clip-text" style="background-color: #18978a;">
                 Het Speelschema
             </h2>
             <p class="text-lg leading-relaxed">
-                Hier vind je de geplande wedstrijden van de Voetbal Frontier Internationaal. Klik op een wedstrijd voor meer details.
+                Hier vind je de geplande wedstrijden van het Voetbal Frontier Internationaal.
             </p>
         </section>
 
-        <!-- Wedstrijden Lijst -->
         <section class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-lg transition-all duration-300 mb-8 max-w-4xl mx-auto">
             <h3 class="text-2xl font-bold mb-6 text-transparent bg-clip-text" style="background-color: #18978a;">
                 Toekomstige Wedstrijden
             </h3>
 
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 font-semibold text-lg">
+                <div>Teams</div>
+                <div>Datum</div>
+                <div>Tijd</div>
+                <div>Locatie</div>
+            </div>
+
             @foreach ($wedstrijden as $wedstrijd)
-                <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                    <p class="text-xl font-semibold text-gray-100">{{ $wedstrijd->team1->name }} vs {{ $wedstrijd->team2->name }}</p>
-                    <p class="text-gray-400">{{ \Carbon\Carbon::parse($wedstrijd->wedstrijd_tijd)->format('d-m-Y H:i') }}</p>
-                    <p class="text-gray-500">{{ $wedstrijd->location }}</p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-800 p-4 rounded-lg mb-4">
+                    <div class="text-gray-200">{{ $wedstrijd->team1->name }} vs {{ $wedstrijd->team2->name }}</div>
+                    <div class="text-gray-200">
+                        @if ($wedstrijd->wedstrijd_tijd)
+                            {{ \Carbon\Carbon::parse($wedstrijd->wedstrijd_tijd)->format('d-m-Y') }}
+                        @else
+                            N/A
+                        @endif
+                    </div>
+                    <div class="text-gray-200">
+                        @if ($wedstrijd->wedstrijd_tijd)
+                            {{ \Carbon\Carbon::parse($wedstrijd->wedstrijd_tijd)->format('H:i') }}
+                        @else
+                            N/A
+                        @endif
+                    </div>
+                    <div class="text-gray-200">{{ $wedstrijd->location }}</div>
                 </div>
             @endforeach
         </section>
