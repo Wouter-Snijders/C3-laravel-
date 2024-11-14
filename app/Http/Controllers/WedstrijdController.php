@@ -2,89 +2,100 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
 use App\Models\Wedstrijd;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class WedstrijdController extends Controller
 {
-    // Haal wedstrijden op en toon ze in de view
-    public function index()
-    {
-        // Haal alle teams op
-        $teams = Team::all();
-
-        // Haal alle wedstrijden op (of pas dit aan op basis van je behoefte)
-        $wedstrijden = Wedstrijd::all();
-
-        // Retourneer de view met de teams en wedstrijden
-        return view('home', compact('teams', 'wedstrijden'));
-    }
-
-    // Voeg de speelschema methode toe
+    // Toon het speelschema met alle wedstrijden
     public function speelschema()
     {
-        // Haal alle wedstrijden op (of pas dit aan op basis van je behoefte)
-        $wedstrijden = Wedstrijd::all();
-
-        // Geef de wedstrijden door aan de speelschema view
-        return view('speelschema', compact('wedstrijden'));
+        // Haal alle wedstrijden op met de bijbehorende teams
+        $wedstrijden = Wedstrijd::with('team1', 'team2')->get();
+        return view('speelschema', compact('wedstrijden')); // geef wedstrijden door naar de view
     }
 
-    // Toon het formulier om een nieuwe wedstrijd te maken
+    // Toon het formulier voor het aanmaken van een nieuwe wedstrijd
     public function create()
     {
-        $teams = Team::all(); // Haal teams op voor het keuze menu
-        return view('wedstrijdmaker', compact('teams'));
+        // Haal de teams en wedstrijden op
+        $teams = Team::all();
+        $wedstrijden = Wedstrijd::with('team1', 'team2')->get();
+
+        // Geef teams en wedstrijden door aan de view
+        return view('wedstrijdmaker', compact('teams', 'wedstrijden'));
     }
 
-    // Sla de nieuwe wedstrijd op
+    // Opslaan van nieuwe wedstrijd
     public function store(Request $request)
     {
+        // Valideer de aanvraag
         $request->validate([
             'team1_id' => 'required|exists:teams,id',
             'team2_id' => 'required|exists:teams,id',
+            'location' => 'required|string',
             'wedstrijd_tijd' => 'required|date',
         ]);
 
+        // Maak een nieuwe wedstrijd aan
         Wedstrijd::create([
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
+            'location' => $request->location,
             'wedstrijd_tijd' => $request->wedstrijd_tijd,
         ]);
 
-        return redirect()->route('home')->with('success', 'Wedstrijd succesvol toegevoegd!');
+        // Redirect terug naar de wedstrijdmaker pagina met een succesmelding
+        return redirect()->route('wedstrijdmaker')->with('success', 'Wedstrijd succesvol toegevoegd!');
     }
 
-    // Bewerk een bestaande wedstrijd
-    public function edit(Wedstrijd $wedstrijd)
+    // Wedstrijd bewerken
+    public function edit($id)
     {
-        $teams = Team::all(); // Haal teams op voor het keuze menu
-        return view('wedstrijden.edit', compact('wedstrijd', 'teams'));
+        $wedstrijd = Wedstrijd::findOrFail($id);
+        $teams = Team::all(); // Haal alle teams op voor de dropdowns
+
+        // Zet wedstrijd_tijd om naar een Carbon object en formatteer naar 'Y-m-d\TH:i' voor datetime-local
+        $wedstrijd_tijd = Carbon::parse($wedstrijd->wedstrijd_tijd)->format('Y-m-d\TH:i');
+
+        // Geef wedstrijd en teams door naar de view
+        return view('wedstrijdbewerken', compact('wedstrijd', 'teams', 'wedstrijd_tijd'));
     }
 
-    // Werk een bestaande wedstrijd bij
-    public function update(Request $request, Wedstrijd $wedstrijd)
+    // Wedstrijd bijwerken
+    public function update(Request $request, $id)
     {
+        // Valideer de aanvraag
         $request->validate([
             'team1_id' => 'required|exists:teams,id',
             'team2_id' => 'required|exists:teams,id',
+            'location' => 'required|string',
             'wedstrijd_tijd' => 'required|date',
         ]);
 
+        // Zoek de specifieke wedstrijd en werk bij
+        $wedstrijd = Wedstrijd::findOrFail($id);
         $wedstrijd->update([
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
+            'location' => $request->location,
             'wedstrijd_tijd' => $request->wedstrijd_tijd,
         ]);
 
-        return redirect()->route('home')->with('success', 'Wedstrijd succesvol bijgewerkt!');
+        // Redirect naar het speelschema met een succesmelding
+        return redirect()->route('wedstrijdmaker')->with('success', 'Wedstrijd succesvol bijgewerkt!');
     }
 
-    // Verwijder een wedstrijd
-    public function destroy(Wedstrijd $wedstrijd)
+    // Wedstrijd verwijderen
+    public function destroy($id)
     {
+        // Zoek de specifieke wedstrijd en verwijder deze
+        $wedstrijd = Wedstrijd::findOrFail($id);
         $wedstrijd->delete();
-        return redirect()->route('home')->with('success', 'Wedstrijd succesvol verwijderd!');
+
+        // Redirect naar de wedstrijdmaker met een succesmelding
+        return redirect()->route('wedstrijdmaker')->with('success', 'Wedstrijd succesvol verwijderd!');
     }
 }

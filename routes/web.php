@@ -31,10 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/mijn-advertenties', [AdvertentieController::class, 'myAdvertisements'])->name('mijn.advertenties');
 
     // Team routes (teamleider)
-    Route::get('/teams', [TeamLeiderController::class, 'index'])->name('teams.index'); // Teams overzicht
-    Route::post('/teams', [TeamLeiderController::class, 'store'])->name('team.store'); // Team toevoegen
-    Route::put('/teams/{team}', [TeamLeiderController::class, 'update'])->name('team.update'); // Team bijwerken
-    Route::delete('/teams/{team}', [TeamLeiderController::class, 'destroy'])->name('team.destroy'); // Team verwijderen
+    Route::get('/teams', [TeamLeiderController::class, 'index'])->name('teams.index');
+    Route::post('/teams', [TeamLeiderController::class, 'store'])->name('team.store');
+    Route::put('/teams/{team}', [TeamLeiderController::class, 'update'])->name('team.update');
+    Route::delete('/teams/{team}', [TeamLeiderController::class, 'destroy'])->name('team.destroy');
 
     // Teamleider panel
     Route::get('/teamleider', [TeamLeiderController::class, 'index'])->name('teamleider');
@@ -52,9 +52,6 @@ Route::get('/winkelmand', [CartController::class, 'index']);
 // Favorieten route
 Route::get('/favorieten', [ProductController::class, 'favorieten'])->name('favorieten');
 
-// Speelschema route
-Route::get('/speelschema', [WedstrijdController::class, 'speelschema'])->name('speelschema');
-
 // Standings route
 Route::get('/stand', [StandController::class, 'index'])->name('stand');
 
@@ -65,28 +62,23 @@ Route::get('/inzet', function () {
 
 // Admin routes
 Route::middleware(['auth', 'can:admin-access'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin'); // Admin dashboard
-    Route::put('/admin/users/{id}/rank', [AdminController::class, 'updateRank'])->name('admin.updateRank'); // Update user rank
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::put('/admin/users/{id}/rank', [AdminController::class, 'updateRank'])->name('admin.updateRank');
     Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
 });
 
 // Wedstrijd routes
 Route::middleware(['auth'])->group(function () {
-    // Home route: Wedstrijden ophalen en tonen
-    Route::get('/', [WedstrijdController::class, 'index'])->name('home');
+    Route::get('wedstrijdmaker', [WedstrijdController::class, 'create'])->name('wedstrijdmaker'); // Nieuw wedstrijd toevoegen
+    Route::post('wedstrijdmaker', [WedstrijdController::class, 'store'])->name('wedstrijden.store'); // Opslaan nieuwe wedstrijd
 
-    // Wedstrijd gerelateerde routes
-    Route::get('wedstrijdmaker', [WedstrijdController::class, 'create'])->name('wedstrijdmaker');
-    Route::post('wedstrijdmaker', [WedstrijdController::class, 'store'])->name('wedstrijden.store');
-    Route::get('wedstrijden/{id}/edit', [WedstrijdController::class, 'edit'])->name('wedstrijden.edit');
-    Route::put('wedstrijden/{id}', [WedstrijdController::class, 'update'])->name('wedstrijden.update');
-    Route::delete('wedstrijden/{id}', [WedstrijdController::class, 'destroy'])->name('wedstrijden.destroy');
-});
+    // Bewerken en verwijderen van wedstrijden
+    Route::get('wedstrijd/{id}/bewerken', [WedstrijdController::class, 'edit'])->name('wedstrijden.edit'); // Wedstrijd bewerken
+    Route::put('wedstrijd/{id}', [WedstrijdController::class, 'update'])->name('wedstrijden.update'); // Update wedstrijd
+    Route::delete('wedstrijd/{id}', [WedstrijdController::class, 'destroy'])->name('wedstrijden.destroy'); // Verwijder wedstrijd
 
-// Admin routes for Wedstrijden
-Route::middleware(['auth', 'can:admin-access'])->group(function () {
-    Route::get('/wedstrijdmaker', [WedstrijdController::class, 'create'])->name('wedstrijdmaker');
-    Route::post('/wedstrijdmaker', [WedstrijdController::class, 'store'])->name('wedstrijden.store');
+    // Speelschema route
+    Route::get('/speelschema', [WedstrijdController::class, 'speelschema'])->name('speelschema');
 });
 
 // Auth routes
