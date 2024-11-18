@@ -43,6 +43,16 @@
                         <input type="datetime-local" name="wedstrijd_tijd" id="wedstrijd_tijd" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm text-white bg-gray-700" required>
                     </div>
 
+                    <div class="mb-4">
+                        <label for="scheidsrechter" class="block text-sm font-medium text-gray-300">Scheidsrechter</label>
+                        <select name="scheidsrechter" id="scheidsrechter" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm text-white bg-gray-700" required>
+                            @foreach ($scheidsrechters as $scheidsrechter)
+                                <option value="{{ $scheidsrechter->name }}" class="text-gray-900 bg-gray-100">{{ $scheidsrechter->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
                     <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300">
                         Voeg Wedstrijd Toe
                     </button>

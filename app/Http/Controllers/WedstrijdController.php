@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wedstrijd;
 use App\Models\Team;
+use App\Models\User; // Voeg het User model toe
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -20,12 +21,13 @@ class WedstrijdController extends Controller
     // Toon het formulier voor het aanmaken van een nieuwe wedstrijd
     public function create()
     {
-        // Haal de teams en wedstrijden op
+        // Haal de teams en scheidsrechters op
         $teams = Team::all();
+        $scheidsrechters = User::where('rank', 'scheidsrechter')->get(); // Haal scheidsrechters op uit de users tabel
         $wedstrijden = Wedstrijd::with('team1', 'team2')->get();
 
-        // Geef teams en wedstrijden door aan de view
-        return view('wedstrijdmaker', compact('teams', 'wedstrijden'));
+        // Geef teams, scheidsrechters en wedstrijden door aan de view
+        return view('wedstrijdmaker', compact('teams', 'scheidsrechters', 'wedstrijden'));
     }
 
     // Opslaan van nieuwe wedstrijd
@@ -35,6 +37,7 @@ class WedstrijdController extends Controller
         $request->validate([
             'team1_id' => 'required|exists:teams,id',
             'team2_id' => 'required|exists:teams,id',
+            'scheidsrechter' => 'required|exists:users,name', // Validatie voor scheidsrechter naam
             'location' => 'required|string',
             'wedstrijd_tijd' => 'required|date',
         ]);
@@ -43,6 +46,7 @@ class WedstrijdController extends Controller
         Wedstrijd::create([
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
+            'scheidsrechter' => $request->scheidsrechter, // Voeg scheidsrechter naam toe
             'location' => $request->location,
             'wedstrijd_tijd' => $request->wedstrijd_tijd,
         ]);
@@ -56,12 +60,13 @@ class WedstrijdController extends Controller
     {
         $wedstrijd = Wedstrijd::findOrFail($id);
         $teams = Team::all(); // Haal alle teams op voor de dropdowns
+        $scheidsrechters = User::where('rank', 'scheidsrechter')->get(); // Haal scheidsrechters op uit de users tabel
 
         // Zet wedstrijd_tijd om naar een Carbon object en formatteer naar 'Y-m-d\TH:i' voor datetime-local
         $wedstrijd_tijd = Carbon::parse($wedstrijd->wedstrijd_tijd)->format('Y-m-d\TH:i');
 
-        // Geef wedstrijd en teams door naar de view
-        return view('wedstrijdbewerken', compact('wedstrijd', 'teams', 'wedstrijd_tijd'));
+        // Geef wedstrijd, teams en scheidsrechters door naar de view
+        return view('wedstrijdbewerken', compact('wedstrijd', 'teams', 'scheidsrechters', 'wedstrijd_tijd'));
     }
 
     // Wedstrijd bijwerken
@@ -71,6 +76,7 @@ class WedstrijdController extends Controller
         $request->validate([
             'team1_id' => 'required|exists:teams,id',
             'team2_id' => 'required|exists:teams,id',
+            'scheidsrechter' => 'required|exists:users,name', // Validatie voor scheidsrechter naam
             'location' => 'required|string',
             'wedstrijd_tijd' => 'required|date',
         ]);
@@ -80,6 +86,7 @@ class WedstrijdController extends Controller
         $wedstrijd->update([
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
+            'scheidsrechter' => $request->scheidsrechter, // Voeg scheidsrechter naam toe
             'location' => $request->location,
             'wedstrijd_tijd' => $request->wedstrijd_tijd,
         ]);
@@ -91,11 +98,10 @@ class WedstrijdController extends Controller
     // Wedstrijd verwijderen
     public function destroy($id)
     {
-        // Zoek de specifieke wedstrijd en verwijder deze
         $wedstrijd = Wedstrijd::findOrFail($id);
         $wedstrijd->delete();
 
-        // Redirect naar de wedstrijdmaker met een succesmelding
+        // Redirect naar het speelschema met een succesmelding
         return redirect()->route('wedstrijdmaker')->with('success', 'Wedstrijd succesvol verwijderd!');
     }
 }

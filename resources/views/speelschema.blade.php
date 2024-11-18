@@ -16,15 +16,16 @@
                 Toekomstige Wedstrijden
             </h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 font-semibold text-lg">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 font-semibold text-lg">
                 <div>Teams</div>
                 <div>Datum</div>
                 <div>Tijd</div>
                 <div>Locatie</div>
+                <div>Scheidsrechter</div> <!-- Nieuwe kolom voor scheidsrechter -->
             </div>
 
             @foreach ($wedstrijden as $wedstrijd)
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-800 p-4 rounded-lg mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 bg-gray-800 p-4 rounded-lg mb-4">
                     <div class="text-gray-200">{{ $wedstrijd->team1->name }} vs {{ $wedstrijd->team2->name }}</div>
                     <div class="text-gray-200">
                         @if ($wedstrijd->wedstrijd_tijd)
@@ -41,6 +42,13 @@
                         @endif
                     </div>
                     <div class="text-gray-200">{{ $wedstrijd->location }}</div>
+                    <div class="text-gray-20 0">
+                        @if ($wedstrijd->scheidsrechter)
+                            {{ $wedstrijd->scheidsrechter }}
+                        @else
+                            N/A
+                        @endif
+                    </div>
                 </div>
             @endforeach
         </section>
