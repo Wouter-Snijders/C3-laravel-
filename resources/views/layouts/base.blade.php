@@ -3,7 +3,7 @@
     <x-head :title="$title ?? 'Voetbal Frontier'"></x-head>
 <body class="bg-gray-900 text-gray-100 font-poppins">
 
-    <header class="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 text-gray-200 py-4 font-sans tracking-wide shadow-lg">
+    <header id="header" class="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 text-gray-200 py-4 font-sans tracking-wide shadow-lg sticky top-0">
         <div class="container mx-auto flex items-center justify-between px-12">
             <div class="flex items-center">
                 <a href="/">
