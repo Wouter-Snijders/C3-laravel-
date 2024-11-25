@@ -98,7 +98,7 @@
 
                 <!-- Admin & Scheids Panel Section -->
                 @auth
-                    @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
+                    @if(auth()->user()->rank === 'scheidsrechter' || auth()->user()->rank === 'admin')
                         <a href="{{ route('wedstrijdmaker') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
                             <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
                                 <h3 class="text-2xl font-semibold mb-6">Wedstrijdmaker Panel</h3>
@@ -106,6 +106,16 @@
                             </div>
                         </a>
                     @endif
+
+                    <!-- Admin & Scheids Panel Section -->
+                @if(auth()->user()->rank === 'teamleider' || auth()->user()->rank === 'admin')
+                    <a href="{{ route('teamleider') }}" class="block transform transition-transform hover:scale-105 rounded-lg">
+                        <div class="bg-gray-900 text-gray-100 shadow-lg rounded-lg p-8 relative group hover:bg-gray-800 hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-6">Teamleider Panel</h3>
+                            <p>Beheer de teams.</p>
+                        </div>
+                    </a>
+                @endif
 
 
                     <!-- Admin Panel Section -->
