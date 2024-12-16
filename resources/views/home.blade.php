@@ -1,6 +1,6 @@
 <x-base-layout>
     <x-slot name="title">
-        Voetbal Frontier
+        Voetbal Frontier Internationaal
     </x-slot>
 
     <!-- Main Content -->
