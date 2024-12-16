@@ -1,4 +1,7 @@
 <x-base-layout>
+    <x-slot name="title">
+        Teamleider Panel
+    </x-slot>
     @auth
         <main class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-white">Teamleider Panel</h1>

@@ -1,4 +1,7 @@
 <x-base-layout>
+    <x-slot name="title">
+        Stand
+    </x-slot>
     <div class="container mx-auto mt-8">
         <h1 class="text-2xl font-bold mb-4 text-white">Standen</h1>
         <table class="min-w-full bg-gray-800 border border-gray-600">
