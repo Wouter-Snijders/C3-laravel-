@@ -94,7 +94,7 @@
 
         <p id="footerText" class="text-center text-gray-200 text-base">&copy; {{ date(' F Y') }} Voetbal Toernooi. Alle rechten voorbehouden.</p>
         <div class="flex justify-center space-x-4 mt-2">
-            <a href="https://x.com/curioonderwijs" class="text-gray-200 hover:text-gray-400 transition-transform transform hover:scale-110">
+            <a href="https://x.com/wjhulzebosch" class="text-gray-200 hover:text-gray-400 transition-transform transform hover:scale-110">
                 <i class="fa-brands fa-twitter"></i>
             </a>
             <a href="https://www.instagram.com/curioonderwijsgroep/" class="text-gray-200 hover:text-gray-400 transition-transform transform hover:scale-110">
