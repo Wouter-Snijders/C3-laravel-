@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\Wedstrijd;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class TeamLeiderController extends Controller
 {
@@ -36,16 +37,16 @@ class TeamLeiderController extends Controller
             $logoPath = 'images/' . time() . '.' . $request->team_logo->extension();
             $request->team_logo->move(public_path('images'), $logoPath);
 
-            // Nieuw team aanmaken
+            // Maak het nieuwe team aan
             $newTeam = Team::create([
                 'name' => $request->team_name,
                 'logo_path' => $logoPath
             ]);
 
             // Genereer wedstrijden
-            $this->generateMatchesForNewTeam($newTeam);
+            $this->generateWedstrijdenForNewTeam($newTeam);
 
-            return redirect()->back()->with('success', 'Team succesvol toegevoegd en wedstrijden gegenereerd!');
+            return redirect()->back()->with('success', 'Team en wedstrijden succesvol toegevoegd!');
         }
 
         return back()->with('error', 'Er ging iets mis bij het uploaden van het logo.');
@@ -72,8 +73,10 @@ class TeamLeiderController extends Controller
         $team->name = $request->team_name;
 
         if ($request->hasFile('team_logo')) {
-            if ($team->logo_path && file_exists(public_path($team->logo_path))) {
-                unlink(public_path($team->logo_path));
+            if ($team->logo_path) {
+                if (file_exists(public_path($team->logo_path))) {
+                    unlink(public_path($team->logo_path));
+                }
             }
             $team->logo_path = 'images/' . time() . '.' . $request->team_logo->extension();
             $request->team_logo->move(public_path('images'), $team->logo_path);
@@ -83,36 +86,45 @@ class TeamLeiderController extends Controller
         return redirect()->back()->with('success', 'Team succesvol bijgewerkt!');
     }
 
-    /**
-     * Genereer wedstrijden voor een nieuw team
-     *
-     * @param Team $newTeam
-     */
-    private function generateMatchesForNewTeam(Team $newTeam)
-    {
-        $existingTeams = Team::where('id', '!=', $newTeam->id)->get();
-        $currentDate = Carbon::now();
+    private function generateWedstrijdenForNewTeam(Team $newTeam)
+{
+    $teams = Team::where('id', '!=', $newTeam->id)->get(); // Haal alle andere teams op
+    $scheidsrechters = User::where('rank', 'scheidsrechter')->get(); // Haal scheidsrechters op
 
-        foreach ($existingTeams as $team) {
-            // Wedstrijd 1: Nieuwe team speelt thuis
-            Wedstrijd::create([
-                'team1_id' => $newTeam->id,
-                'team2_id' => $team->id,
-                'scheidsrechter' => 'Nog niet toegewezen', // Pas dit aan indien nodig
-                'location' => $newTeam->name . ' Stadion',
-                'wedstrijd_tijd' => $currentDate->addDays(7)->toDateTimeString()
-            ]);
+    if ($scheidsrechters->isEmpty()) {
+        // Geen scheidsrechters gevonden
+        return;
+    }
 
-            // Wedstrijd 2: Bestaande team speelt thuis
-            Wedstrijd::create([
-                'team1_id' => $team->id,
-                'team2_id' => $newTeam->id,
-                'scheidsrechter' => 'Nog niet toegewezen', // Pas dit aan indien nodig
-                'location' => $team->name . ' Stadion',
-                'wedstrijd_tijd' => $currentDate->addDays(7)->toDateTimeString()
-            ]);
+    foreach ($teams as $opponent) {
+        // Eerste wedstrijd: Thuiswedstrijd voor $newTeam
+        $this->createWedstrijd($newTeam, $opponent, $scheidsrechters, 'thuis');
 
-            $currentDate->addDays(1); // Verhoog de datum voor de volgende wedstrijden
-        }
+        // Tweede wedstrijd: Thuiswedstrijd voor $opponent
+        $this->createWedstrijd($opponent, $newTeam, $scheidsrechters, 'thuis');
     }
 }
+
+private function createWedstrijd($homeTeam, $awayTeam, $scheidsrechters, $wedstrijdType)
+{
+    $randomScheidsrechter = $scheidsrechters->random(); // Kies een willekeurige scheidsrechter
+    $startOfWeek = Carbon::now()->startOfWeek(); // Maandag van deze week
+    $endOfWeek = Carbon::now()->endOfWeek(); // Zondag van deze week
+
+    // Kies een willekeurige datum tussen maandag en zondag van deze week
+    $wedstrijdDatum = Carbon::createFromTimestamp(rand($startOfWeek->timestamp, $endOfWeek->timestamp));
+
+    // Stel een tijd in tussen 08:00 en 15:00 uur met afgeronde uren
+    $wedstrijdTijd = $wedstrijdDatum->setHour(rand(8, 15))->setMinute(0); // Afgerond op een heel uur
+
+    // Maak de wedstrijd aan
+    Wedstrijd::create([
+        'team1_id' => $homeTeam->id,
+        'team2_id' => $awayTeam->id,
+        'scheidsrechter' => $randomScheidsrechter->name,
+        'location' => 'Stadion ' . $homeTeam->name, // Het stadion van het thuisteam
+        'wedstrijd_tijd' => $wedstrijdTijd
+    ]);
+    }
+}
+
